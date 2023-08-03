@@ -170,14 +170,14 @@ if not path_img.exists():
     for filename in curr_dir.rglob('*.pdf'):
         # print(pathlib.Path(filename).stem)
         pdf_to_img(filename)
-# 建立图片文件夹
-path_img.mkdir()
+    # 建立图片文件夹
+    path_img.mkdir()
 
-# 递归遍历所有jpg文件并切割
-for filename in curr_dir.glob('*.jpg'):
-    print(filename)
-    # img = Image.open(filename)
-    img_split(filename)
+    # 递归遍历所有jpg文件并切割
+    for filename in curr_dir.glob('*.jpg'):
+        print(filename)
+        # img = Image.open(filename)
+        img_split(filename)
 
 files = os.listdir(path_img)
 # NB 改变当前路径
@@ -214,8 +214,9 @@ for img in sorted(path_img.glob('*.jpg'), key = lambda img : (img.stem)):
     merger.append(f)
 
     # 为指定图片添加书签
-    if img_str.endswith('_0_00'):
-        bk_name = (img_str[0:len(img_str)-len('_0_00')])
+    str_bookmark_end = '__1_00'
+    if img_str.endswith(str_bookmark_end):
+        bk_name = (img_str[0:len(img_str)-len(str_bookmark_end)])
         bkmk = merger.addBookmark(bk_name, len(merger.pages) - 1) 
         print(bk_name)
 
